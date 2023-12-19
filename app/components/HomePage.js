@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Image, ScrollView } from 'react-native';
 import { Dimensions } from 'react-native';
 import SubHome from '../SubHome';
-import Footer from '../Footer';
+import Footer from '../users/Footer';
+import LoginForm from '../Login';
 
 const { width, height } = Dimensions.get('window');
 
@@ -41,15 +42,13 @@ const HomePag = () => {
         flex: 1,
         flexDirection: 'column',
       }}
-      className="w-full min-h-screen bg-gray-950 flex flex-col"
     >
       <View className="bunnerPage w-full z-0 h-fit">
         <View
           style={{}}
-          className=" top-0 left-0 w-full h-sceen transition-opacity duration-500"
         >
           <Image
-            source={require('../assets/nat.jpg')}
+            source={require('../../assets/nat.jpg')}
             style={{
               width: width,
               height: height,
@@ -63,10 +62,8 @@ const HomePag = () => {
               left: width / 50,
               fontSize: 50,
             }}
-            className="description absolute top-1/2 left-1/2 w-full  px-9 transform -translate-x-1/2 -translate-y-1/2 text-white laptop:text-5xl desktop:text-5xl text-justify tablet:text-4xl text-xl flex  leading-loosefont-bold"
           >
             <View
-              className="mainDescription w-full flex flex-col space-y-3 items-center justify-center"
               id="mainDescription"
             >
               <Text
@@ -75,7 +72,6 @@ const HomePag = () => {
                   color: '#4287f5',
                   fontWeight: 'bold',
                 }}
-                className="content text-6xl font-bold text-blue-700"
               >
                 {displayText}
               </Text>
@@ -85,6 +81,8 @@ const HomePag = () => {
       </View>
       <SubHome />
       <Footer />
+      <LoginForm />
+
     </ScrollView>
   );
 };
