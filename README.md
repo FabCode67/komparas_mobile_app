@@ -1,7 +1,7 @@
 # KOMPARAS MOBILE APP
 ## TECHNOLOGIES
 - Expo
-- ReaactNative
+- ReactNative
 - Javascript
 - Tailwindcss
 - RestFull Api with NodeJS
