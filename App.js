@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { Text, View , ScrollView} from 'react-native';
-import NavBar from './components/NavBar';
-import HomePag from './components/HomePage';
+import NavBar from './app/components/NavBar';
+import HomePag from './app/HomePage';
 export default function App() {
   return (
     <View>

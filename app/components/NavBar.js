@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   menuContainer: {
     flex: 2,
     flexDirection: 'row',
-    gap:6,
+    gap:24,
     width:100,
     alignItems:'center',
     justifyContent:'center',

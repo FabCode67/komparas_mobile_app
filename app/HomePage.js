@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, ScrollView } from 'react-native';
 import { Dimensions } from 'react-native';
-import SubHome from '../SubHome';
-import Footer from '../users/Footer';
-import LoginForm from '../Login';
+
 
 const { width, height } = Dimensions.get('window');
 
@@ -35,20 +33,18 @@ const HomePag = () => {
   }, []);
 
   return (
-    <ScrollView
-      style={{
+   
+      <View  style={{
         width: width,
         height: height,
         flex: 1,
         flexDirection: 'column',
-      }}
-    >
-      <View className="bunnerPage w-full z-0 h-fit">
+      }} className="bunnerPage w-full z-0 h-fit">
         <View
           style={{}}
         >
           <Image
-            source={require('../../assets/nat.jpg')}
+            source={require('../assets/nat.jpg')}
             style={{
               width: width,
               height: height,
@@ -79,11 +75,6 @@ const HomePag = () => {
           </View>
         </View>
       </View>
-      <SubHome />
-      <Footer />
-      <LoginForm />
-
-    </ScrollView>
   );
 };
 
