@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons'; 
+import { Link } from 'expo-router';
 
 
 const NavBar = () => {
@@ -17,10 +18,10 @@ const NavBar = () => {
           <Text>Home</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.menuButton}>
-          <Text>About</Text>
+          <Text>Contact</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.menuButton}>
-          <Text>Contact</Text>
+          <Link href="/login/page">Login</Link>
         </TouchableOpacity>
       </View>
       <View style={styles.iconsContainer}>
@@ -54,7 +55,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderBottomColor: 'gray',
     backgroundColor: '#4287f5',
-    marginTop:20,
     position:'fixed',
   },
   logoContainer: {
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   menuContainer: {
     flex: 2,
     flexDirection: 'row',
-    gap:6,
+    gap:24,
     width:100,
     alignItems:'center',
     justifyContent:'center',
