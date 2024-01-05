@@ -32,9 +32,6 @@ const NavBar = () => {
 
   }, []);
 
-  console.log("=============>", result);
-  console.log("=============>", token);
-  console.log("=============>", profile_picture);
 
   const logout = async () => {
     await SecureStore.deleteItemAsync('result');
@@ -82,7 +79,7 @@ const NavBar = () => {
       }>
         <Image
           source={{
-            uri: JSON.parse(profile_picture),
+            uri: profile_picture ? JSON.parse(profile_picture): 'https://i.fbcd.co/products/original/9847a67d09a39d0ef02f4cacc70490cdbe8cae2a1f7c9a2e5bf23e9a126137ec.jpg',
           }} style={{ width: 50, height: 50 }}
         />
       </View>
@@ -120,10 +117,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     display: 'flex'
-
   },
   menuButton: {
-    // backgroundColor: 'white',
     fontSize: 15
   },
   iconsContainer: {

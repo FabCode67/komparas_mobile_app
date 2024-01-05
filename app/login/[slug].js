@@ -27,7 +27,14 @@ const LoginForm = () => {
       await save('result', 'success');
       await save('token', JSON.stringify(json?.token));
       await save('profile_picture', JSON.stringify(json?.user?.profile_picture))
-      router.push('/');
+      if (json?.user?.role === 'admin') {
+        await save('admin', 'true');
+        router.push('/dashboard/page');
+      }
+      else {
+        await save('admin', 'false');
+        router.push('/');
+      }
     }
     else {
       alert("Login failed")
