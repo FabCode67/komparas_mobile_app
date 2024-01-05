@@ -28,7 +28,8 @@
     "react-native-screens": "~3.22.0",
     "react-native-web": "~0.19.6",
     "tailwindcss": "^3.3.2",
-    "expo-image-picker": "~14.3.2"
+    "expo-image-picker": "~14.3.2",
+    "expo-secure-store": "~12.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

@@ -2,11 +2,16 @@
 import React from 'react'
 import { View, Text, Image, TextInput, TouchableOpacity, ScrollView, Button } from 'react-native';
 import { Link, router } from 'expo-router';
+import * as SecureStore from 'expo-secure-store';
+
 
 const LoginForm = () => {
   const [email, setUserEmail] = React.useState('');
   const [password, setUserPassword] = React.useState('');
-
+  async function save(key, value) {
+    await SecureStore.setItemAsync(key, value);
+  }
+  
   const login = async () => {
     const response = await fetch(`https://blue-angry-gorilla.cyclic.app/login`, {
       method: 'POST',
@@ -17,7 +22,11 @@ const LoginForm = () => {
     });
     const json = await response.json();
 
+    console.log("json-------------------------", json);
     if (json.message === 'Login successful') {
+      await save('result', 'success');
+      await save('token', JSON.stringify(json?.token));
+      await save('profile_picture', JSON.stringify(json?.user?.profile_picture))
       router.push('/');
     }
     else {

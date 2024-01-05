@@ -1,71 +1,63 @@
 
-import React from 'react'
+import React, {useState} from 'react'
 import { View, Text, Image, TextInput, TouchableOpacity, ScrollView, Button } from 'react-native';
 import { Link, router } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
 
-
 const SignupForm = () => {
- 
-    const [formData, setFormData] = React.useState({
-      first_name: '',
-      last_name: '',
-      email: '',
-      password: '',
-      confirm_password: '',
-      profile_picture: '',
-    });
-    const pickImage = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ImagePicker.MediaTypeOptions.All,
-          allowsEditing: true,
-          aspect: [4, 3],
-          quality: 1,
-        });
-    
-        console.log(result);
-    
-        if (!result.canceled) {
-            setFormData({ ...formData, profile_picture: result.uri });
-        }
-      };
+  const [formData, setFormData] = useState({
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: '',
+    confirm_password: '',
+    profile_picture: '',
+  });
 
-      const handleSubmit = async () => {
-        try {
-            // Validate form inputs here (e.g., check if passwords match, email is valid, etc.)
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setFormData({ ...formData, profile_picture: result.uri });
+    }
+  };
+
+  const handleSubmit = async () => {
+    const data = new FormData();
+    data.append('first_name', formData.first_name);
+    data.append('last_name', formData.last_name);
+    data.append('email', formData.email);
+    data.append('password', formData.password);
+    data.append('confirm_password', formData.confirm_password);
+    data.append('profile_picture', {
+      uri: formData.profile_picture,
+      type: 'image/jpeg', 
+      name: 'profile_picture.jpg',
+    });
+
+    try {
+      const response = await fetch('https://blue-angry-gorilla.cyclic.app/users/add', {
+        method: 'POST',
+        body: data,
+      });
+      const json = await response.json();
+      if(json?.message === 'User added successfully')
+      {
+        router.push('/login/page')
+      }
+      else{
+        alert(json?.message)
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  };
     
-            const formData = new FormData();
-            formData.append('first_name', formData.first_name);
-            formData.append('last_name', formData.last_name);
-            formData.append('email', formData.email);
-            formData.append('password', formData.password);
-            formData.append('confirm_password', formData.confirm_password);
-            formData.append('profile_picture', {
-                uri: formData.profile_picture,
-                name: 'profile_picture.jpg',
-                type: 'image/jpg',
-            });
-    
-            const response = await fetch('https://blue-angry-gorilla.cyclic.app/users/add', {
-                method: 'POST',
-                body: formData,
-            });
-    
-            if (response.ok) {
-                const json = await response.json();
-                console.log(json);
-            } else {
-                // Handle server-side errors or other issues
-                console.error('Server error:', response.status, response.statusText);
-            }
-        } catch (error) {
-            // Handle any unexpected errors
-            console.error('Unexpected error:', error.message);
-        }
-    };
-    
-    
-  
   return (
     <ScrollView>
     <View className="h-fit py-12 relative">

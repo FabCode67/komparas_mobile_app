@@ -1,11 +1,48 @@
-import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { StyleSheet } from 'react-native';
-import { FontAwesome5 } from '@expo/vector-icons'; 
+import { FontAwesome5 } from '@expo/vector-icons';
 import { Link } from 'expo-router';
+import * as SecureStore from 'expo-secure-store';
+import { router } from 'expo-router';
+
 
 
 const NavBar = () => {
+  const [result, setResult] = useState('');
+  const [token, setToken] = useState('');
+  const [profile_picture, setUserProfile] = useState('')
+
+  useEffect(() => {
+    async function getValueFor(key) {
+      const storedResult = await SecureStore.getItemAsync(key);
+      setResult(storedResult);
+    }
+    async function getToken(key) {
+      const storedToken = await SecureStore.getItemAsync(key);
+      setToken(storedToken);
+    }
+    async function getProfile(key) {
+      const storedProfile = await SecureStore.getItemAsync(key);
+      setUserProfile(storedProfile);
+    }
+    getProfile('profile_picture');
+    getToken('token');
+    getValueFor('result');
+
+  }, []);
+
+  console.log("=============>", result);
+  console.log("=============>", token);
+  console.log("=============>", profile_picture);
+
+  const logout = async () => {
+    await SecureStore.deleteItemAsync('result');
+    await SecureStore.deleteItemAsync('user');
+    await SecureStore.deleteItemAsync('profile_picture');
+    router.push('/login/page');
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
@@ -14,29 +51,40 @@ const NavBar = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.menuContainer}>
-        <TouchableOpacity style={styles.menuButton}>
-          <Text>Home</Text>
-        </TouchableOpacity>
+
         <TouchableOpacity style={styles.menuButton}>
           <Text>Contact</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.menuButton}>
-          <Link href="/login/page">Login</Link>
+          <TouchableOpacity onPress={logout}>
+            {result !== 'success' ? <Text>Login</Text> : <Text>Logout</Text>}
+          </TouchableOpacity>
         </TouchableOpacity>
       </View>
       <View style={styles.iconsContainer}>
         <TouchableOpacity style={styles.iconButton}>
           <View style={styles.iconContainer}>
-          <FontAwesome5 name="heart" size={24} color="black" />
+            <FontAwesome5 name="cart-arrow-down" size={24} color="black" />
             <Text style={styles.iconBadge}>9+</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconButton}>
-          <View style={styles.iconContainer}>
-          <FontAwesome5 name="cart-arrow-down" size={24} color="black" />
-            <Text style={styles.iconBadge}>9+</Text>
-          </View>
-        </TouchableOpacity>
+      </View>
+      <View style={
+        {
+          width: 50,
+          height: 50,
+          borderRadius: 50,
+          backgroundColor: 'white',
+          overflow: 'hidden',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }
+      }>
+        <Image
+          source={{
+            uri: JSON.parse(profile_picture),
+          }} style={{ width: 50, height: 50 }}
+        />
       </View>
     </View>
   );
@@ -55,38 +103,38 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderBottomColor: 'gray',
     backgroundColor: '#4287f5',
-    position:'fixed',
+    position: 'fixed',
   },
   logoContainer: {
     flex: 1,
   },
   logoButton: {
-    color:'white',
+    color: 'white',
     fontSize: 20,
   },
   menuContainer: {
     flex: 2,
     flexDirection: 'row',
-    gap:24,
-    width:100,
-    alignItems:'center',
-    justifyContent:'center',
-    display:'flex'
-    // justifyContent: 'space-between',
-    // display: 'none', // Hidden on smaller screens
+    gap: 24,
+    width: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    display: 'flex'
+
   },
   menuButton: {
     // backgroundColor: 'white',
-    fontSize:15
+    fontSize: 15
   },
   iconsContainer: {
     flexDirection: 'row',
     marginLeft: 6,
+    marginRight: 12,
     float: 'right',
     gap: 10,
   },
   iconButton: {
-position:'relative',
+    position: 'relative',
   },
   iconContainer: {
     flexDirection: 'row',
@@ -102,8 +150,6 @@ position:'relative',
     padding: 2,
     top: -10,
     right: -3,
-
-
   },
 });
 
