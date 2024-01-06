@@ -39,7 +39,7 @@ const Dashboard = () => {
       <View className="bg-red-700 min-h-screen">
         <TopNavBar />
         <SideBar onSelectContent={setSelectedContent} />
-        <View className="bodyOfDashboard w-full ml-[15%] bg-slate-500 h-screen p-2 text-center items-center flex">
+        <View className="bodyOfDashboard w-full  ml-[15%] bg-slate-500 h-screen p-2 ">
          <Text>{renderContent()}</Text> 
         </View>
       </View>

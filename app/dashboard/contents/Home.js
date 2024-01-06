@@ -3,8 +3,8 @@ import { View, Text } from 'react-native'
 
 const Home = () => {
   return (
-    <View>
-        <Text>Homeddd</Text>
+    <View className="bg-red-500 w-full">
+        <Text className="bg-red-500 w-full" >Homedddfffffffffffffffff</Text>
     </View>
   )
 }
