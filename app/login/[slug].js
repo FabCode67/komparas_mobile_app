@@ -11,7 +11,7 @@ const LoginForm = () => {
   async function save(key, value) {
     await SecureStore.setItemAsync(key, value);
   }
-  
+
   const login = async () => {
     const response = await fetch(`https://blue-angry-gorilla.cyclic.app/login`, {
       method: 'POST',
@@ -27,6 +27,8 @@ const LoginForm = () => {
       await save('result', 'success');
       await save('token', JSON.stringify(json?.token));
       await save('profile_picture', JSON.stringify(json?.user?.profile_picture))
+      await save('first_name', JSON.stringify(json?.user?.first_name));
+      await save('last_name', JSON.stringify(json?.user?.last_name));
       if (json?.user?.role === 'admin') {
         await save('admin', 'true');
         router.push('/dashboard/page');
@@ -55,7 +57,6 @@ const LoginForm = () => {
                 <View className="flex justify-center m-auto">
                   <Text className="text-2xl font-bold text-black">Log in</Text>
                 </View>
-
                 <View className="input-field relative">
                   <TextInput
                     placeholder='Enter your email'

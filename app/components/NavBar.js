@@ -12,7 +12,6 @@ const NavBar = () => {
   const [result, setResult] = useState('');
   const [token, setToken] = useState('');
   const [profile_picture, setUserProfile] = useState('')
-
   useEffect(() => {
     async function getValueFor(key) {
       const storedResult = await SecureStore.getItemAsync(key);
@@ -31,13 +30,11 @@ const NavBar = () => {
     getValueFor('result');
 
   }, []);
-
-
   const logout = async () => {
     await SecureStore.deleteItemAsync('result');
     await SecureStore.deleteItemAsync('user');
     await SecureStore.deleteItemAsync('profile_picture');
-    router.push('/login/page');
+    router.push('/dashboard/page');
   }
 
   return (
