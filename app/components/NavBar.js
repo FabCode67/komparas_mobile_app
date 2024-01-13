@@ -34,7 +34,7 @@ const NavBar = () => {
     await SecureStore.deleteItemAsync('result');
     await SecureStore.deleteItemAsync('user');
     await SecureStore.deleteItemAsync('profile_picture');
-    router.push('/dashboard/page');
+    router.push('/login/page');
   }
 
   return (

@@ -22,14 +22,14 @@ const HomePag = () => {
         setTimeout(() => {
           setDisplayText('');
           index = 0;
-          updateText(); // Restart the animation
-        }, 1000); // Adjust the delay before restarting the animation
+          updateText(); 
+        }, 1000); 
       }
-    }, 50); // You can adjust the interval to control the speed
+    }, 50);
   };
 
   useEffect(() => {
-    updateText(); // Start the initial animation
+    updateText(); 
   }, []);
 
   return (
