@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import TopNavBar from './TopNavBar';
 import SideBar from './SideBar';
 import Home from './contents/Home'; 
@@ -39,9 +39,9 @@ const Dashboard = () => {
       <View className="bg-red-700 min-h-screen">
         <TopNavBar />
         <SideBar onSelectContent={setSelectedContent} />
-        <View className="bodyOfDashboard w-full  ml-[15%] bg-slate-500 h-screen p-2 ">
+        <ScrollView className="bodyOfDashboard w-full  ml-[15%] bg-slate-500 h-screen p-2 ">
          <Text>{renderContent()}</Text> 
-        </View>
+        </ScrollView>
       </View>
     </View>
   );

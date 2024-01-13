@@ -1,65 +1,118 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { getAllProducts } from '../../api/products';
+import { getAllCategories } from '../../api/categories';
+import { FontAwesome5 } from '@expo/vector-icons';
+import { getAllUsers } from '../../api/users';
+
 
 const Home = () => {
+  const [productsData, setProductsData] = useState([]);
+  const [categoriesData, setCategoriesData] = useState([]);
+  const [usersData, setUsersData] = useState([]);
+  useEffect(() => {
+    const getUsers = async () => {
+      const users = await getAllUsers();
+      console.log(users.data?.users);
+      setUsersData(users?.data?.users);
+    }
+    getUsers();
+  }, []);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      const products = await getAllProducts();
+      setProductsData(products?.data?.products);
+    }
+    getProducts();
+  }, []);
+
+  useEffect(() => {
+    const getCategories = async () => {
+      const categories = await getAllCategories();
+      console.log(categories,"++++++++++++");
+      setCategoriesData(categories);
+    }
+    getCategories(); 
+  }, []);
+  useEffect(() => {
+    const getUsers = async () => {
+      const users = await getAllUsers();
+      console.log(users.data?.users);
+      setUsersData(users?.data?.users);
+    }
+    getUsers();
+  }, []);
   return (
-    <ScrollView style={styles.container}>
-      {/* Header Section */}
+    <ScrollView>
+      <View className="Two cards flex flex-row w-full justify-between">
+        <View className="w-[30%] bg-white p-3 text-blue-700  font-bold jus flex items-center text-center ">
+          <Text>Products</Text>
+          <Text className="text-2xl">{productsData.length}</Text>
+        </View>
+        <View className="w-[30%] bg-white p-3 text-blue-700  font-bold jus flex items-center text-center ">
+          <Text>Categories</Text>
+          <Text className="text-2xl">{categoriesData.length}</Text>
+        </View>
+      </View>
+
+    <View style={styles.container} className="mt-2">
       <View style={styles.header}>
         <Text style={styles.headerText}>Welcome to  Komparas</Text>
       </View>
-
-      {/* Featured Products Section */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Featured Products</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {/* Sample Product Cards */}
-          <View style={styles.productCard}>
-            <Image
-              source={{ uri: 'https://example.com/product1.jpg' }}
-              style={styles.productImage}
-            />
-            <Text style={styles.productName}>Product 1</Text>
-            <Text style={styles.productPrice}>$99.99</Text>
-          </View>
-
-          <View style={styles.productCard}>
-            <Image
-              source={{ uri: 'https://example.com/product2.jpg' }}
-              style={styles.productImage}
-            />
-            <Text style={styles.productName}>Product 2</Text>
-            <Text style={styles.productPrice}>$79.99</Text>
-          </View>
-
-          {/* Add more product cards as needed */}
+          {productsData.map((item, index) => (
+            <View style={styles.productCard} key={index}>
+              <Image
+                source={{ uri: item?.product_image }}
+                style={styles.productImage}
+              />
+              <Text style={styles.productName}>{(item?.product_name).slice(0, 15) + '...'}</Text>
+              <Text style={styles.productPrice}>{item?.product_price}</Text>
+            </View>
+          ))}
         </ScrollView>
       </View>
-
-      {/* Trending Categories Section */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Trending Categories</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {/* Sample Category Buttons */}
+          {categoriesData.slice(0,3).map((item, index) => (
           <View style={styles.categoryButton}>
-            <Text style={styles.categoryButtonText}>Electronics</Text>
+            <Text style={styles.categoryButtonText}>
+              {item?.name}
+            </Text>
           </View>
-
-          <View style={styles.categoryButton}>
-            <Text style={styles.categoryButtonText}>Clothing</Text>
-          </View>
-          <View style={styles.categoryButton}>
-            <Text style={styles.categoryButtonText}>Home</Text>
-          </View>
+          ))}
         </ScrollView>
       </View>
+    </View>
+
+    <View style={styles.container} className="mt-2">
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Featured users</Text>
+      </View>
+      <View style={styles.section}>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          {usersData.slice(0,2).map((item, index) => (
+            <View style={styles.productCard} key={index}>
+              <Image
+                source={{ uri: item?.profile_picture }}
+                style={styles.productImage}
+              />
+              <Text style={styles.productName}>{(item?.first_name).slice(0, 15) + '...'}</Text>
+              <Text style={styles.productPrice}>{item?.last}</Text>
+            </View>
+          ))}
+    </ScrollView>
+      </View>
+    </View>
     </ScrollView>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
     padding: 16,
   },
@@ -85,7 +138,9 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     overflow: 'hidden',
     width: 120,
-    backgroundColor:"red"
+    backgroundColor: "gray",
+    color: '#fff',
+    padding: 2,
   },
   productImage: {
     width: '100%',

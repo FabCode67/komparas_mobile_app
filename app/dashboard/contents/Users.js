@@ -15,6 +15,10 @@ const Users = () => {
   }, []);
 
   const renderProductItem = ({ item , index}) => (
+    <View className="w-full flex flex-col">
+     <View className = "flex flex-row space-x-3 p-2 text-xs justify-between bg-white">
+      <Text>Add new product</Text>
+</View>
     <View  className = "w-full flex flex-row space-x-3 p-2 text-xs justify-between border-b-2 bg-slate-300 border-b-blue-700">
     <Text className='text-xs flex my-auto justify-center items-center text-center'>{index+1}</Text>
       <Image
@@ -52,6 +56,7 @@ const Users = () => {
         renderItem={renderProductItem}
         keyExtractor={index => index.toString()}
       />
+    </View>
     </View>
   );
 };
