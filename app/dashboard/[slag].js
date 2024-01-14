@@ -39,9 +39,9 @@ const Dashboard = () => {
       <View className="bg-red-700 min-h-screen">
         <TopNavBar />
         <SideBar onSelectContent={setSelectedContent} />
-        <ScrollView className="bodyOfDashboard w-full  ml-[15%] bg-slate-500 h-screen p-2 ">
+        <View className="bodyOfDashboard w-full  ml-[15%] bg-slate-500 h-screen p-2 ">
          <Text>{renderContent()}</Text> 
-        </ScrollView>
+        </View>
       </View>
     </View>
   );
