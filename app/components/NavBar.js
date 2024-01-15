@@ -6,8 +6,6 @@ import { Link } from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
 import { router } from 'expo-router';
 
-
-
 const NavBar = () => {
   const [result, setResult] = useState('');
   const [token, setToken] = useState('');
@@ -34,7 +32,7 @@ const NavBar = () => {
     await SecureStore.deleteItemAsync('result');
     await SecureStore.deleteItemAsync('user');
     await SecureStore.deleteItemAsync('profile_picture');
-    router.push('/dashboard/page');
+    router.push('/login/page');
   }
 
   return (
