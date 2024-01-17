@@ -45,10 +45,10 @@ const HomeProduct = () => {
               <View style={styles.productCard1Text}>
                 <Text style={styles.productStarsReview}>product Stars</Text>
                 <Text style={styles.productName}>
-                  {item?.product_name?.length > 40 ? item?.product_name?.substring(0, 40) + '...' : item?.product_name?.substring(0, 40)}
+                  {item?.product_name?.length > 40 ? item?.product_name?.substring(0, 40) + '...' : item?.name?.substring(0, 40)}
                 </Text>
                 <Text style={styles.productPrice}>
-                  From <Text style={styles.bold}>${item?.product_price}</Text> in <Text style={styles.bold}>5</Text> stores
+                  From <Text style={styles.bold}>${item?.price}</Text> in <Text style={styles.bold}>5</Text> stores
                 </Text>
               </View>
               <Link className="w-full bg-blue-700 p-3 text-white font-bold jus flex items-center text-center " href={`/product/${item._id}`}>

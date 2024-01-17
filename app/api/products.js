@@ -7,24 +7,10 @@ export const getAllProducts = async () => {
     return await res;
 }
 
-export const getPoductByCategory = async (category) => {
-    const res = axios.get(`/products/category/${category}`);
-    return await res;
-}
-
-export const getPoductById = async (id) => {
-    const res = axios.get(`/products/images/${id}`);
-    return await res;
-}
-
-export const getProductOnCategory = async (category) => {
-    const res = axios.get(`/products/category/${category}`);
-    return await res;
-}
-
-export const getProductOnSearch = async (search) => {
-    const res = axios.get(`/products/search/${search}`);
-    return await res;
+export const deleteProduct = async (id) =>{
+  const res = axios.delete(`https://blue-angry-gorilla.cyclic.app/native/products/${id}`);
+  console.log(res);
+  return await res;
 }
 
 export const addProduct = async (productData) => {
@@ -47,10 +33,4 @@ export const addProduct = async (productData) => {
     console.log(res);
     return  res
   };
-export const deleteProduct = async (id) => {
-    const res = await fetch(`/products/${id}`, {
-        method: 'DELETE',
-    });
 
-    return await res.json();
-};

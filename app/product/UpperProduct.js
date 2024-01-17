@@ -32,7 +32,7 @@ const UpperProduct = () => {
   const [isLoading, setLoading] = useState(true);
 
   const getProduct = async () => {
-    const response = await fetch(`https://blue-angry-gorilla.cyclic.app/products/${id}`);
+    const response = await fetch(`https://blue-angry-gorilla.cyclic.app/native/products/${id}`);
     const json = await response.json();
     setProduct(json);
     setLoading(false);
@@ -43,13 +43,13 @@ const UpperProduct = () => {
   }
     , []);
 
-  console.log("product-------------------------", product);
+  console.log("product---]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]----------------------", product?.data);
   return (
     <ScrollView>
       <View className=' w-full  flex-col space-y-8  h-fit'>
         <View className='w-full bg-white rounded-md flex flex-col h-fit pb-10'>
           <View className='w-full flex flex-col  h-fit p-5 space-y-4'>
-            <Text className='text-4xl font-bold'>{product?.product?.product_name}</Text>
+            <Text className='text-4xl font-bold'>{product?.data?.name}</Text>
             <View className='productRating flex flex-row space-x-2 justify-start my-auto items-center'>
               {renderRatingStars()}
               <Text className='text-lg text-gray-400'>(4.5)</Text>
@@ -63,7 +63,7 @@ const UpperProduct = () => {
             className='image flex flex-col w-full h-88  p-2 rounded-sm'>
             <Image
               source={{
-                uri: product?.product?.product_image,
+                uri: product?.data?.image,
               }}
               style={{
                 height: 300,
@@ -72,11 +72,11 @@ const UpperProduct = () => {
             />
           </View>
           <View className="relatedPictures flex flex-row w-full justify-center bg-rd-300 items-center m-auto space-x-2 p-2">
-          {/* {product?.product?.product_images?.map((image, index) => ( */}
+            {/* {product?.product?.product_images?.map((image, index) => ( */}
             <View className="RelatedImages w-[7rem]  h-32 rounded-sm">
               <Image
                 source={{
-                  uri:'https://res.cloudinary.com/dqksbyovs/image/upload/v1703351797/product-images/rgt6fi6eha7r7mmh0h6h.jpg',
+                  uri: 'https://res.cloudinary.com/dqksbyovs/image/upload/v1703351797/product-images/rgt6fi6eha7r7mmh0h6h.jpg',
                 }}
                 style={{
                   height: 70,
@@ -88,7 +88,7 @@ const UpperProduct = () => {
             <View className="RelatedImages w-[7rem]  h-32 rounded-sm">
               <Image
                 source={{
-                  uri:'https://res.cloudinary.com/dqksbyovs/image/upload/v1703351797/product-images/rgt6fi6eha7r7mmh0h6h.jpg',
+                  uri: 'https://res.cloudinary.com/dqksbyovs/image/upload/v1703351797/product-images/rgt6fi6eha7r7mmh0h6h.jpg',
                 }}
                 style={{
                   height: 70,
@@ -100,7 +100,7 @@ const UpperProduct = () => {
             <View className="RelatedImages w-[7rem]  h-32 rounded-sm">
               <Image
                 source={{
-                  uri:'https://res.cloudinary.com/dqksbyovs/image/upload/v1703351797/product-images/rgt6fi6eha7r7mmh0h6h.jpg',
+                  uri: 'https://res.cloudinary.com/dqksbyovs/image/upload/v1703351797/product-images/rgt6fi6eha7r7mmh0h6h.jpg',
                 }}
                 style={{
                   height: 70,
@@ -109,14 +109,14 @@ const UpperProduct = () => {
                 }}
               />
             </View>
-          {/* ))} */}
-        </View>
+            {/* ))} */}
+          </View>
           <View className='description flex h-94flex-col w-full'>
             <View className='w-full h-fit'>
               <View className='w-full flex flex-col h-fit p-5 space-y-4'>
-                <Text className='text-2xl font-bold'>{product?.product?.product_name}</Text>
+                <Text className='text-2xl font-bold'>{product?.product?.name}</Text>
                 <Text className='text-lg font-medium'>
-                  {product?.product?.product_description}
+                  {product?.data?.description}
                 </Text>
               </View>
             </View>

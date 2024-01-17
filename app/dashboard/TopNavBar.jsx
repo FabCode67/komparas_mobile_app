@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
-import { router } from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
 
 const TopNavBar = () => {
