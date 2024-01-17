@@ -11,14 +11,16 @@ const Contact = () => {
   });
 
   const handleContact = () => {
-    // You can implement the logic to handle the contact form data here
-    console.log('Contact Form Data:', contactData);
-    // For simplicity, let's clear the form after submission
-    setContactData({
-      name: '',
-      email: '',
-      message: '',
+    const message = fetch('https://blue-angry-gorilla.cyclic.app/users/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(contactData),
     });
+    console.log(message);
+    alert('Your message has been sent successfully');
+    setContactData({ name: '', email: '', message: '' });
   };
 
   return (

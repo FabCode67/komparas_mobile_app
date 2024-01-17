@@ -38,18 +38,13 @@ const Product = () => {
       setFormData({ ...formData, image: result.uri });
     }
   };
-
-  const handleDelete = async (id) => {
-    setRefreshing(true);
-    await deleteProduct(id);
-    setRefreshing(false);
+  const getProducts = async () => {
+    const products = await getAllProducts();
+    setProductsData(products?.data?.data);
   }
-
+  
   useEffect(() => {
-    const getProducts = async () => {
-      const products = await getAllProducts();
-      setProductsData(products?.data?.data);
-    }
+  
     getProducts();
   }, [refreshing]);
 
@@ -60,7 +55,6 @@ const Product = () => {
     setIsEditProductForm(true);
   }
   const handleUpdate = async () => {
-    // Similar to your handleDelete function, update the product on the server
     setRefreshing(true);
     const data = new FormData();
     data.append('name', formData.name);
@@ -82,6 +76,14 @@ const Product = () => {
     const json = await res.json();
     setRefreshing(false);
     setIsEditProductForm(false);
+  }
+
+  const handleDelete = async (id) => {
+    setRefreshing(true);
+    await deleteProduct(id);
+    setRefreshing(false);
+    getProducts();
+
   }
 
 
