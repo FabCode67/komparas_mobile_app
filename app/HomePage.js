@@ -14,10 +14,10 @@ const HomePag = () => {
   const updateText = () => {
     let index = 0;
     const intervalId = setInterval(() => {
-      setDisplayText(fullText.substring(0, index));
+      setDisplayText(fullText?.substring(0, index));
       index++;
 
-      if (index > fullText.length) {
+      if (index > fullText?.length) {
         clearInterval(intervalId);
         setTimeout(() => {
           setDisplayText('');

@@ -9,7 +9,7 @@ const HomeProduct = () => {
   const [data, setData] = useState([]);
 
   const getProducts = async () => {
-    const response = await fetch('https://blue-angry-gorilla.cyclic.app/products');
+    const response = await fetch('https://blue-angry-gorilla.cyclic.app/native/products');
     const json = await response.json();
     setData(json);
     setLoading(false);
@@ -29,12 +29,12 @@ const HomeProduct = () => {
         </View>
       ) : (
         <View style={styles.gridContainer}>
-          {data?.products?.map((item, index) => (
+          {data?.data?.map((item, index) => (
             <View style={styles.productCard1} key={index}>
               <View style={styles.productCard1Img}>
                 <Image
                   source={{
-                    uri: item?.product_image,
+                    uri: item?.image,
                   }}
                   style={{
                     height: 300,
@@ -45,10 +45,10 @@ const HomeProduct = () => {
               <View style={styles.productCard1Text}>
                 <Text style={styles.productStarsReview}>product Stars</Text>
                 <Text style={styles.productName}>
-                  {item?.product_name.length > 40 ? item?.product_name.substring(0, 40) + '...' : item?.product_name.substring(0, 40)}
+                  {item?.product_name?.length > 40 ? item?.product_name?.substring(0, 40) + '...' : item?.product_name?.substring(0, 40)}
                 </Text>
                 <Text style={styles.productPrice}>
-                  From <Text style={styles.bold}>${item.product_price}</Text> in <Text style={styles.bold}>5</Text> stores
+                  From <Text style={styles.bold}>${item?.product_price}</Text> in <Text style={styles.bold}>5</Text> stores
                 </Text>
               </View>
               <Link className="w-full bg-blue-700 p-3 text-white font-bold jus flex items-center text-center " href={`/product/${item._id}`}>

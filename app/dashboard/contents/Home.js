@@ -22,7 +22,7 @@ const Home = () => {
   useEffect(() => {
     const getProducts = async () => {
       const products = await getAllProducts();
-      setProductsData(products?.data?.products);
+      setProductsData(products?.data?.data);
     }
     getProducts();
   }, []);
@@ -48,11 +48,11 @@ const Home = () => {
       <View className="Two cards flex flex-row w-full justify-between">
         <View className="w-[30%] bg-white p-3 text-blue-700  font-bold jus flex items-center text-center ">
           <Text>Products</Text>
-          <Text className="text-2xl">{productsData.length}</Text>
+          <Text className="text-2xl">-</Text>
         </View>
         <View className="w-[30%] bg-white p-3 text-blue-700  font-bold jus flex items-center text-center ">
           <Text>Categories</Text>
-          <Text className="text-2xl">{categoriesData.length}</Text>
+          <Text className="text-2xl">-</Text>
         </View>
       </View>
 
@@ -63,13 +63,13 @@ const Home = () => {
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Featured Products</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {productsData.map((item, index) => (
+          {productsData?.slice(0,2).map((item, index) => (
             <View style={styles.productCard} key={index}>
               <Image
-                source={{ uri: item?.product_image }}
+                source={{ uri: item?.image }}
                 style={styles.productImage}
               />
-              <Text style={styles.productName}>{(item?.product_name).slice(0, 15) + '...'}</Text>
+              <Text style={styles.productName}>{(item?.product_name)?.slice(0, 15) + '...'}</Text>
               <Text style={styles.productPrice}>{item?.product_price}</Text>
             </View>
           ))}
@@ -78,7 +78,7 @@ const Home = () => {
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Trending Categories</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {categoriesData.slice(0,3).map((item, index) => (
+          {categoriesData?.slice(0,3).map((item, index) => (
           <View style={styles.categoryButton}>
             <Text style={styles.categoryButtonText}>
               {item?.name}
@@ -95,13 +95,13 @@ const Home = () => {
       </View>
       <View style={styles.section}>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {usersData.slice(0,2).map((item, index) => (
+          {usersData?.slice(0,2).map((item, index) => (
             <View style={styles.productCard} key={index}>
               <Image
                 source={{ uri: item?.profile_picture }}
                 style={styles.productImage}
               />
-              <Text style={styles.productName}>{(item?.first_name).slice(0, 15) + '...'}</Text>
+              <Text style={styles.productName}>{(item?.first_name)?.slice(0, 15) + '...'}</Text>
               <Text style={styles.productPrice}>{item?.last}</Text>
             </View>
           ))}
