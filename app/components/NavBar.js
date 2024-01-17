@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { Link } from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
 import { router } from 'expo-router';
 
@@ -35,6 +34,18 @@ const NavBar = () => {
     router.push('/dashboard/page');
   }
 
+  const navigateToContact = () => {
+    router.push('/messages/page');
+  }
+
+  const navigateToCart = () => {
+    router.push('/cart/page');
+  }
+
+  const navigateToProfile = () =>{
+    router.push('/account/page')
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
@@ -43,7 +54,7 @@ const NavBar = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.menuContainer}>
-        <TouchableOpacity style={styles.menuButton}>
+        <TouchableOpacity onPress={navigateToContact} style={styles.menuButton}>
           <Text>Contact</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.menuButton}>
@@ -53,14 +64,14 @@ const NavBar = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.iconsContainer}>
-        <TouchableOpacity style={styles.iconButton}>
+        <TouchableOpacity style={styles.iconButton} onPress={navigateToCart}>
           <View style={styles.iconContainer}>
             <FontAwesome5 name="cart-arrow-down" size={24} color="black" />
             <Text style={styles.iconBadge}>9+</Text>
           </View>
         </TouchableOpacity>
       </View>
-      <View style={
+      <TouchableOpacity onPress={navigateToProfile} style={
         {
           width: 50,
           height: 50,
@@ -76,7 +87,7 @@ const NavBar = () => {
             uri: profile_picture ? JSON.parse(profile_picture): 'https://i.fbcd.co/products/original/9847a67d09a39d0ef02f4cacc70490cdbe8cae2a1f7c9a2e5bf23e9a126137ec.jpg',
           }} style={{ width: 50, height: 50 }}
         />
-      </View>
+      </TouchableOpacity >
     </View>
   );
 };

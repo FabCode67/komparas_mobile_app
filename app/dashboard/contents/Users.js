@@ -6,20 +6,26 @@ import { getAllUsers } from '../../api/users';
 
 const Users = () => {
   const [usersData, setUsersData] = useState([]);
-  useEffect(() => {
-    const getUsers = async () => {
-      const users = await getAllUsers();
-      console.log(users.data?.users);
-      setUsersData(users?.data?.users);
-    }
-    getUsers();
-  }, []);
+  const [refreshing, setRefreshing] = useState(false);
 
+  const getUsers = async () => {
+    const users = await getAllUsers();
+    console.log(users.data?.users);
+    setUsersData(users?.data?.users);
+  };
+
+  useEffect(() => {
+    getUsers();
+  }, [refreshing]); // Trigger useEffect when 'refreshing' state changes
+
+  const handleDelete = async (id) => {
+    await fetch(`https://blue-angry-gorilla.cyclic.app/users/delete/${id}`, {
+      method: 'DELETE',
+    });
+    setRefreshing((prev) => !prev); // Toggle the value of 'refreshing' to trigger a re-fetch
+  };
   const renderProductItem = ({ item, index }) => (
     <View className="w-full flex flex-col">
-      <View className="flex flex-row space-x-3 p-2 text-xs justify-between bg-white">
-        <Text>Add new product</Text>
-      </View>
       <View className="w-full flex flex-row space-x-3 p-2 text-xs justify-between border-b-2 bg-slate-300 border-b-blue-700">
         <Text className='text-xs flex my-auto justify-center items-center text-center'>{index + 1}</Text>
         <Image
@@ -32,16 +38,15 @@ const Users = () => {
         <Text className='text-xs flex my-auto justify-center items-center text-center'>{(item?.last_name)?.slice(0, 5) + '...'}</Text>
         <Text className='text-xs flex my-auto justify-center items-center text-center'>{(item?.email)?.slice(0, 7) + '...'}</Text>
         <Text className='text-xs flex my-auto justify-center items-center text-center'>{(item?.role)}</Text>
-        <TouchableOpacity>
-          <Text className='text-xs my-auto justify-center items-center text-center space-x-2 flex'>
-            <Text className='text-xs flex my-auto justify-center items-center text-center'>   </Text>
-            <FontAwesome5 name="trash" size={15} color="black" />
-          </Text>
-        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleDelete(item?._id)}>
+        <Text className='text-xs my-auto justify-center items-center text-center space-x-2 flex'>
+          <Text className='text-xs flex my-auto justify-center items-center text-center'>   </Text>
+          <FontAwesome5 name="trash" size={15} color="black" />
+        </Text>
+      </TouchableOpacity>
       </View>
     </View>
   );
-
       return (
       <View className="w-full flex flex-col">
         <View className="w-full flex flex-row space-x-3 p-2 text-xs justify-between bg-white">
@@ -56,7 +61,7 @@ const Users = () => {
         <FlatList
           data={usersData}
           renderItem={renderProductItem}
-          keyExtractor={index => index.toString()}
+          keyExtractor={index => index}
         />
       </View>
   
