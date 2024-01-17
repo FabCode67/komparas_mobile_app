@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import * as SecureStore from 'expo-secure-store';
+import { router } from 'expo-router';
 
 const TopNavBar = () => {
     const [first_name, setFirstName] = useState('')
@@ -22,9 +23,13 @@ const TopNavBar = () => {
                 console.log(error)
             })
     }, [])
+
+    const navigateToHome = () => {
+        router.push('/')
+    }
     return (
         <View className="flex flex-row w-full justify-between bg-blue-700 p-5">
-            <TouchableOpacity>
+            <TouchableOpacity onPress={navigateToHome}>
                 <Text className='text-white text-lg'>Dashboard</Text>
             </TouchableOpacity>
             <View>

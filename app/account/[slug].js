@@ -5,12 +5,28 @@ import NavBar from '../components/NavBar';
 import Footer from '../users/Footer';
 const Profile = () => {
     const [profile_picture, setUserProfile] = React.useState('')
+    const [first_name, setfirst_name] = React.useState('')
+    const [last_name, setlast_name] = React.useState('')
     React.useEffect(() => {
         async function getProfile(key) {
             const storedProfile = await SecureStore.getItemAsync(key);
             setUserProfile(storedProfile);
         }
         getProfile('profile_picture');
+    }, []);
+    React.useEffect(() => {
+        async function getfirst_name(key) {
+            const storedProfile = await SecureStore.getItemAsync(key);
+            setfirst_name(storedProfile);
+        }
+        getfirst_name('first_name');
+    }, []);
+    React.useEffect(() => {
+        async function getlast_name(key) {
+            const storedProfile = await SecureStore.getItemAsync(key);
+            setlast_name(storedProfile);
+        }
+        getlast_name('last_name');
     }, []);
     return (
         <ScrollView>
@@ -22,8 +38,8 @@ const Profile = () => {
                     }}
                     className="h-32 w-32 rounded-full mb-4"
                 />
-                <Text className="text-2xl font-bold mb-2">John Doe</Text>
-                <Text className="text-gray-500 mb-4">Web Developer</Text>
+                <Text className="text-2xl font-bold mb-2">{first_name ? JSON.parse(first_name):"-"} {last_name ? JSON.parse(last_name):"-"}</Text>
+                <Text className="text-gray-500 mb-4">Web Developern</Text>
 
                 <View className="bg-white p-4 rounded-md shadow-md w-4/5">
                     <Text className="text-lg font-bold mb-2">About Me</Text>
