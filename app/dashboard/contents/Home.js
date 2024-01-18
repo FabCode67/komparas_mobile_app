@@ -12,7 +12,6 @@ const Home = () => {
   useEffect(() => {
     const getUsers = async () => {
       const users = await getAllUsers();
-      console.log(users.data?.users);
       setUsersData(users?.data?.users);
     }
     getUsers();
@@ -47,11 +46,11 @@ const Home = () => {
       <View className="Two cards flex flex-row w-full justify-between">
         <View className="w-[30%] bg-white p-3 text-blue-700  font-bold jus flex items-center text-center ">
           <Text>Products</Text>
-          <Text className="text-2xl">-</Text>
+          <Text className="text-2xl">{productsData?.length}</Text>
         </View>
         <View className="w-[30%] bg-white p-3 text-blue-700  font-bold jus flex items-center text-center ">
           <Text>Categories</Text>
-          <Text className="text-2xl">-</Text>
+          <Text className="text-2xl">{categoriesData?.length}</Text>
         </View>
       </View>
 

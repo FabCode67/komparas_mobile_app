@@ -109,7 +109,6 @@ const Footer = () => {
             </View>
         </View>
     )
-
 }
 
 export default Footer

@@ -8,7 +8,6 @@ const Chat = () => {
   const [messages, setMessages] = React.useState([
     { id: '1', sender: 'John Doe', message: 'Hey, how are you?' },
     { id: '2', sender: 'Jane Doe', message: 'Meeting at 2 PM' },
-    // Add more message objects as needed
   ]);
 
   const renderChatItem = ({ item }) => (

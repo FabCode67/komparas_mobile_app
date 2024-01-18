@@ -3,6 +3,7 @@ import * as SecureStore from 'expo-secure-store';
 import React from 'react';
 import NavBar from '../components/NavBar';
 import Footer from '../users/Footer';
+import { router } from 'expo-router';
 const Profile = () => {
     const [profile_picture, setUserProfile] = React.useState('')
     const [first_name, setfirst_name] = React.useState('')
@@ -28,6 +29,9 @@ const Profile = () => {
         }
         getlast_name('last_name');
     }, []);
+    const backTohome = () =>{
+        router.push("/")
+    }
     return (
         <ScrollView>
             <NavBar />
@@ -47,8 +51,8 @@ const Profile = () => {
                         I'm a passionate web developer with a focus on creating clean and efficient code.
                     </Text>
                 </View>
-                <TouchableOpacity className="mt-4 bg-blue-500 p-2 rounded-md" onPress={() => alert('Edit Profile')}>
-                    <Text className="text-white">Edit Profile</Text>
+                <TouchableOpacity className="mt-4 bg-blue-500 p-2 rounded-md" onPress={backTohome}>
+                    <Text className="text-white">Back to home</Text>
                 </TouchableOpacity>
             </View>
             <Footer />

@@ -107,8 +107,22 @@ const Product = () => {
         body: data,
       });
       const json = await response.json();
-      if (json?.message === 'User added successfully') {
-        alert("good")
+      if (json?.message === 'Product added successfully') {
+        alert(json?.message)
+        setIsAddProductForm(false)
+
+        // Reset the form data  
+
+        setFormData({
+          name: '',
+          description: '',
+          price: '',
+          quantity: '',
+          category: '',
+          location: '',
+          image: '',
+        });
+
       }
       else {
         alert(json?.message)

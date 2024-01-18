@@ -45,11 +45,14 @@ const NavBar = () => {
   const navigateToProfile = () =>{
     router.push('/account/page')
   }
+  const navigateToHome = () =>{
+    router.push('/')
+  }
 
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
-        <TouchableOpacity style={styles.logoButton}>
+        <TouchableOpacity style={styles.logoButton} onPress={navigateToHome}>
           <Text style={styles.logoButton}>KOMPARAS</Text>
         </TouchableOpacity>
       </View>
