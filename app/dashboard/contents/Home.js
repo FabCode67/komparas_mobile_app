@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import { getAllProducts } from '../../api/products';
 import { getAllCategories } from '../../api/categories';
-import { FontAwesome5 } from '@expo/vector-icons';
 import { getAllUsers } from '../../api/users';
 
 

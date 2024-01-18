@@ -103,7 +103,7 @@ const Footer = () => {
                 </View>
                 <View className="mt-12 border-t border-gray-700 pt-8">
                     <Text className="text-base leading-6 text-gray-400 xl:text-center">
-                        &copy; 2023 Creativa poeta. All rights reserved.
+                        &copy; 2023 Fab, Yvette and Victor. All rights reserved.
                     </Text>
                 </View>
             </View>
